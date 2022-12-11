@@ -9,6 +9,8 @@ namespace Fuhrparkverwaltung
     public class Auto
     {
         private int kilometerstand;
+        private int verbrauchProHundertKm;
+        private int tankInhalt;
 
 
         public int Kilometerstand
@@ -18,13 +20,53 @@ namespace Fuhrparkverwaltung
                 return kilometerstand;
             }
         }
-        public Auto (int kilometerstand)
+
+        public int VerbrauchProHundertKm
         {
-            kilometerstand = this.kilometerstand;
+            get
+            {
+                return verbrauchProHundertKm;
+            }
         }
 
-    
+        public int Tankinhalt
+        {
+            get
+            {
+                return tankInhalt;
+            }
+        }
 
+        public Auto (int kilometerstand)
+        {
+            this.kilometerstand = kilometerstand;
+        }
+        
+            public Auto (int kilometerstand, int verbrauchPro100Km, int tankInhalt) :this(kilometerstand)
+        {
+            this.verbrauchProHundertKm = verbrauchPro100Km;
+            this.tankInhalt = tankInhalt;
+
+        }
+
+       
+
+      public void Fahren(int streckeInKilometer)
+        {
+            if (streckeInKilometer >= 0)
+            {
+                
+                kilometerstand = kilometerstand + streckeInKilometer;
+                tankInhalt = tankInhalt - ((verbrauchProHundertKm * streckeInKilometer) / 100);
+                if (tankInhalt < 0)
+                {
+                    tankInhalt = 0;
+                }
+            }
+            
+        }
+
+       
 
 
 
