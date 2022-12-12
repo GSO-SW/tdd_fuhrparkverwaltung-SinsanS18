@@ -8,12 +8,12 @@ namespace Fuhrparkverwaltung
 {
     public class Auto
     {
-        private int kilometerstand;
-        private int verbrauchProHundertKm;
-        private int tankInhalt;
+        private double kilometerstand;
+        private double verbrauchProHundertKm;
+        private double tankInhalt;
 
 
-        public int Kilometerstand
+        public double Kilometerstand
         {
             get
             {
@@ -21,7 +21,7 @@ namespace Fuhrparkverwaltung
             }
         }
 
-        public int VerbrauchProHundertKm
+        public double VerbrauchProHundertKm
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Fuhrparkverwaltung
             }
         }
 
-        public int Tankinhalt
+        public double Tankinhalt
         {
             get
             {
@@ -37,30 +37,36 @@ namespace Fuhrparkverwaltung
             }
         }
 
-        public Auto (int kilometerstand)
+        public Auto (double kilometerstand)
         {
             this.kilometerstand = kilometerstand;
         }
-        
-            public Auto (int kilometerstand, int verbrauchPro100Km, int tankInhalt) :this(kilometerstand)
+
+        public Auto(double kilometerstand, double verbrauchPro100Km, double tankInhalt) : this(kilometerstand)
         {
             this.verbrauchProHundertKm = verbrauchPro100Km;
             this.tankInhalt = tankInhalt;
-
         }
+        
 
        
 
-      public void Fahren(int streckeInKilometer)
+      public void Fahren(double  streckeInKilometer)
         {
             if (streckeInKilometer >= 0)
             {
-                
-                kilometerstand = kilometerstand + streckeInKilometer;
+                double restKM = (tankInhalt / verbrauchProHundertKm) * 100;
+
+                double tankSave = tankInhalt;
+                //kilometerstand = kilometerstand + streckeInKilometer;
                 tankInhalt = tankInhalt - ((verbrauchProHundertKm * streckeInKilometer) / 100);
-                if (tankInhalt < 0)
+                if (tankInhalt >= 0)
                 {
-                    tankInhalt = 0;
+                    kilometerstand = kilometerstand + streckeInKilometer;
+                }
+                else
+                {
+                    tankInhalt = tankSave;
                 }
             }
             

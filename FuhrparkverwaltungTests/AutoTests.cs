@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Fuhrparkverwaltung;
+using System.Security.Cryptography.X509Certificates;
+using NuGet.Frameworks;
 
 namespace FuhrparkverwaltungTests
 {
@@ -49,9 +51,9 @@ namespace FuhrparkverwaltungTests
             //Arrange
 
             int kilometerstand = 10;                                    
-            int verbrauchProHundertKm = 8;
+            double verbrauchProHundertKm = 8;
             int streckeInKilometern = 100;
-            int tankInhalt = 10;
+            double tankInhalt = 10;
 
             Auto a = new Auto(kilometerstand, verbrauchProHundertKm, tankInhalt );
 
@@ -71,9 +73,9 @@ namespace FuhrparkverwaltungTests
             //Arrange
 
             int kilometerstand = 10;
-            int verbrauchProHundertKm = 8;
+            double verbrauchProHundertKm = 8;
             int streckeInKilometern = 200;
-            int tankInhalt = 10;
+            double tankInhalt = 10;
 
             Auto a = new Auto(kilometerstand, verbrauchProHundertKm, tankInhalt);
             
@@ -84,9 +86,34 @@ namespace FuhrparkverwaltungTests
             Assert.AreEqual(210, a.Kilometerstand);
             Assert.AreEqual(0, a.Tankinhalt);
 
+        }
 
+        [TestMethod]
+
+        //Aufg 5 nicht vollständig
+
+        public void Realistische_Fahrt()
+        {
+
+            //Arrange
+            double kilometerstand = 10;
+            double verbrauchProHundertKm = 8;
+            double streckeInKilometern = 200;
+            double tankInhalt = 10;
+
+            Auto a = new Auto(kilometerstand, verbrauchProHundertKm, tankInhalt);
+
+
+
+            //Act
+            a.Fahren(streckeInKilometern);
+
+            //Assert
+
+            Assert.AreEqual(160, a.Kilometerstand);
+            Assert.AreEqual(0, a.Tankinhalt);
 
         }
-    
+
     }
 }
